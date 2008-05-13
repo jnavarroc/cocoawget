@@ -1,0 +1,11 @@
+"Start"="開始";
+"Stop"="キャンセル";
+"Downloading"="ダウンロード中";
+"Connecting"="接続中";
+"Finished"="完了";
+"waiting"="待機中";
+"Canceled"="キャンセルされました";
+"Are you sure to quit application?"="アプリケーションを終了しますか?";
+"Downloading item exists."="ダウンロード中の項目があります。";
+"Yes"="はい";
+"No"="いいえ";
