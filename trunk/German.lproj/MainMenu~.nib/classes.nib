@@ -1,0 +1,42 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {
+                addToList = id; 
+                delete = id; 
+                setAutoDownload = id; 
+                setCheckTimeStamp = id; 
+                setHTTPPassword = id; 
+                setHTTPUser = id; 
+                setRecursive = id; 
+                setRecursiveLevel = id; 
+                setRecursiveType = id; 
+                setReferer = id; 
+                setResume = id; 
+                setURL = id; 
+                showLog = id; 
+                startStop = id; 
+            }; 
+            CLASS = CWArrayController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                drawer = id; 
+                logView = id; 
+                startButton = id; 
+                tableView = id; 
+                urlTextField = id; 
+            }; 
+            SUPERCLASS = NSArrayController; 
+        }, 
+        {CLASS = DownloadItem; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {selectDownloadFolder = id; showWgetOptionHelp = id; }; 
+            CLASS = MainController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {arrayController = id; mainWindow = id; prefWindow = id; url = id; }; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}
