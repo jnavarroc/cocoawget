@@ -8,7 +8,7 @@
 #define WAITING NSLocalizedString(@"waiting",@"")
 #define CANCELED NSLocalizedString(@"Canceled",@"")
 
-//#define DEBUG
+#define DEBUG
 
 #ifdef DEBUG
 #define NSLOG NSLog
