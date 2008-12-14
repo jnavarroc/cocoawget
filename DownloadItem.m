@@ -10,9 +10,9 @@
     -(void)restoreWgetrc;
     -(void)removeFromNotificationCenter;
     -(void)finish;
-    -(BOOL)parseLog:(NSString*)str;
+    -(void)parseLog:(NSString*)str;
     -(void)log:(NSString*)str;
-	-(void)parseSavedFilePath;
+    -(void)parseSavedFilePath;
 @end
 
 @implementation DownloadItem
@@ -280,22 +280,10 @@
 
 -(BOOL)parseDownloadedPath:(NSString*)str
 {
-	if([status isEqualToString:CONNECTING]==NO) return NO;
-	
-	
-    if(str==NULL) return NO;
-    const char * cStr=[str cString];
-    if(cStr==NULL) return NO;
-	int length=[str length];
-	if(length<4) return NO;
-	//if(cStr[length-1]!=`a`) return NO;
-	
-	/*
-	char *ptr=strstr(cStr,"=>");
-	if(ptr==NULL) return NO;
-	NSString *s=[NSString stringWithCString:ptr+4 length:length-(ptr-cStr)-5];
-	NSLog(s);
-	*/
+    if([status isEqualToString:CONNECTING]==NO) return NO;
+
+    int length=[str length];
+    if(length<4) return NO;
 	
 
 	NSRange range=[str rangeOfString:@"=>" options:NSLiteralSearch];
@@ -311,10 +299,7 @@
 	NSRange range2=[str2 rangeOfString:@"\'" options:NSLiteralSearch];
 	if(range2.length<=0) return NO;
 	
-	
 	//NSLOG(@"range2 %d %d",range2.location,range2.length);
-	
-	
 	
 	NSString *s=[str2 substringToIndex:range2.location];
 	
@@ -329,84 +314,70 @@
 
 -(BOOL)parseDownloadingProgress:(NSString*)str
 {
-    if(str==NULL) return NO;
-
-	const char * cStr=[str cString];
-
+/*
     if([status isEqualToString:DOWNLOADING]==NO &&
         [status isEqualToString:FINISHED]==NO ){
-		if((strstr(cStr,"200 OK")!=NULL)){
+		if([str rangeOfString:@"200 OK" options:NSLiteralSearch].location>0){
+            //if((strstr(cStr,"200 OK")!=NULL)){
 			[status setString:DOWNLOADING];
 			[self setValue:status forKey:@"status"];
 		}else{
 			//NSLog(@"------------------");
 			//NSLog(str);
 		}
-    }
-	
-    
-    if((cStr==NULL)||(strstr(cStr,"B/s")==NULL)) return NO;
-	
+    }	
+*/
 	if([status isEqualToString:DOWNLOADING]==NO &&
         [status isEqualToString:FINISHED]==NO ){
 		[status setString:DOWNLOADING];
 		[self setValue:status forKey:@"status"];
 	}
-        
+    
     NSArray *array = [str componentsSeparatedByString:@" "];
     if(array==NULL) return NO;
     int n=[array count];
+    //NSLOG(@"array count %d",n);
     if(n<=1) return NO;
     
-
-            
-    
-    int i;
     int startIndex=1;
-    
     BOOL parseBPS=YES;
-    for(i=n-1;i>=startIndex;i--){
+    for(int i=n-1;i>=startIndex;i--){
         NSString *s=[array objectAtIndex:i];
         int length=[s length];
-        //NSLog(@"%d:<%@>",i,s);
+        //NSLOG(@"==%d:<%@>",i,s);
         if(parseBPS){
-            
-            if((length>=3)&&([s rangeOfString:@"B/s" options:NSLiteralSearch].length>0)){
+            if( length>=1 && [s characterAtIndex :length-1] == 's'){
                 //set speed
-                NSString *speedStr=[[array objectAtIndex:i-1] stringByAppendingString:s];
-                [self setValue:speedStr forKey:@"speed"];
+                NSString *speedStr=[[array objectAtIndex:i-1] stringByAppendingString:@"B/s"];
+                if(speedStr) [self setValue:speedStr forKey:@"speed"];
                 i--;
                 parseBPS=NO;
             }
         }else{
             if(length>1){
-            NSRange percentRange=[s rangeOfString:@"%" options:NSLiteralSearch];
-            if(percentRange.length>0){
-            
-                //set percent
-                NSString *percentString=[s substringToIndex:percentRange.location];
-                [self setValue:percentString forKey:@"percent"];
-
-                return YES;
-            }
+                NSRange percentRange=[s rangeOfString:@"%" options:NSLiteralSearch];
+                if(percentRange.length>0){
+                    //set percent
+                    NSString *percentString=[s substringToIndex:percentRange.location];
+                    [self setValue:percentString forKey:@"percent"];
+                    return YES;
+                }
             }
         } 
-        
     }
     return NO;
 }
--(BOOL)parseLog:(NSString*)str
+-(void)parseLog:(NSString*)str
 {
-    if(!str) return YES;
-    int length=[str length];
-    if(length==0) return YES;
-    
-	BOOL result=NO;
-	result=[self parseDownloadedPath:str];
-
+/*
+    NSLOG(@"parseLog ");
+    NSLOG(str);
+    NSLOG(@"parseLog end");
+ */       
+    BOOL result=NO;
+    result=[self parseDownloadedPath:str];
     result=[self parseDownloadingProgress:str];
-    if(result) return YES;
-    
+    if(result) return;
     if(
         ([str rangeOfString:@"ERROR"  options:NSLiteralSearch].length>0) 
         ){
@@ -415,90 +386,36 @@
     }else{
        //NSLOG(str); 
     }
-    
-    
-    return YES;
 }
 
 -(void)log:(NSString*)str
 {
-
-        if(str==nil) return;
-        if([str length]==0) return;
+    //NSLOG(str);
+    if(str==nil) return;
+    if([str length]==0) return;
 
 NS_DURING
         
         //add to log
-        [logString appendString:str];
-        
+        [logString appendString:str];        
         [lastLogLine appendString:str];
-        
 
+        NSUInteger lastLogLineLength=[lastLogLine length];
+        if(lastLogLineLength<10) return;
+        NSRange range=NSMakeRange(0, lastLogLineLength);
+        range = [lastLogLine lineRangeForRange:NSMakeRange(range.location, 0)];
+        //NSLOG(@"%d %d %d",lastLogLineLength,range.length,range.location);
+        if(range.length>0){
+            NSString *line=[lastLogLine substringWithRange:range];
+            [self parseLog:line];            
+            //notify logUpdate
+            if(self && delegate && [delegate respondsToSelector:@selector(logUpdated:)]){
+                [delegate logUpdated:self];
+            }
         
-        //static BOOL isParsing=NO;
-        if(1){//if(isParsing==NO){
-            //isParsing=YES;
-            #if 0
-            int lastLogLineLength=[lastLogLine length];
-            NSRange range = [lastLogLine lineRangeForRange:NSMakeRange(0, 0)];
-        /*   
-            const char *cStr=[lastLogLine cString];
-            int cStrLength=strlen(cStr);
-            NSRange range2=NSMakeRange(0, cStrLength-1);
-            int i;
-            for(i=cStrLength-1;i>=0;i--){
-                char c=cStr[i];
-                if(c=='\n') {
-                    range2.location=0;
-                    range2.length=i;
-                    break;
-                }
-            }
-            
-            if(range.length!=range2.length||range.location!=range2.location){
-                NSLog(@"%d %d %d %d",range.location,range2.location,range.length,range2.length);
-                NSLog(lastLogLine);
-            }
-          */  
-          #else
-           
-            const char *cStr=[lastLogLine cString];
-            int lastLogLineLength=strlen(cStr);
-            NSRange range=NSMakeRange(0, lastLogLineLength-1);
-            int i;
-            for(i=lastLogLineLength-1;i>=0;i--){
-                char c=cStr[i];
-                if(c=='\n') {
-                    range.location=0;
-                    range.length=i;
-                    break;
-                }
-            }
+            if(self) [lastLogLine deleteCharactersInRange:range];
+        }
 
-          
-          #endif
-            if((range.length>0)&&(range.length+range.location<lastLogLineLength)) {
-                NSString *line=[lastLogLine substringWithRange:range];
-              
-                /*
-                NSLOG(@"line start-----");
-                        NSLOG(line);
-                NSLOG(@"line end-----");
-                */
-				
-                [self parseLog:line];
-            
-                //notify logUpdate
-                if(self && delegate && [delegate respondsToSelector:@selector(logUpdated:)]){
-                    [delegate logUpdated:self];
-                }
-            
-                if(self) [lastLogLine deleteCharactersInRange:range];
-            }
-            //isParsing=NO;
-        }else {
-			NSLOG(@"isParsing");
-		}
 NS_HANDLER
     // deal with any exception
     //NSLog(@"exception");
@@ -508,24 +425,17 @@ NS_ENDHANDLER
 
 -(void)readPipe:(NSNotification *)notification
 {
-    
-    NSData *data=[[notification userInfo] 
-        objectForKey:NSFileHandleNotificationDataItem];
+    NSData *data=[[notification userInfo] objectForKey:NSFileHandleNotificationDataItem];
     if(!data) return;
     if([data length]){
-        NSString *str=[[[NSString alloc]initWithData:data encoding:
-            NSUTF8StringEncoding
-            //NSASCIIStringEncoding
-            ]autorelease];
-        
+        NSString *str=[[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding] autorelease];
         [self log:str];
-        
         //20050420
         if(self){
-			if([status isEqualToString:DOWNLOADING]){
-			double sleepTime=0.05;//0.1
-			[NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:sleepTime]];
-			}
+            if([status isEqualToString:DOWNLOADING]){
+                double sleepTime=0.2;//0.1
+                [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:sleepTime]];
+            }
         }
 		    
         if(self)[[wgetPipe fileHandleForReading] readInBackgroundAndNotify];
@@ -565,11 +475,8 @@ NS_ENDHANDLER
     [self stopDownload];
     if(finished) [self finish];
 	
-	NSLOG(@"DownloadItem::terminateTask end");
+    NSLOG(@"DownloadItem::terminateTask end");
 }
-
-
-
 -(void)removeFromNotificationCenter
 {
     NSLOG(@"DownloadItem::removeFromNotificationCenter");
@@ -581,13 +488,10 @@ NS_ENDHANDLER
         removeObserver:self 
         name:NSFileHandleReadCompletionNotification 
         object:[wgetPipe fileHandleForReading]];
- 
 }
 
 -(NSArray *)getArgument
 {
-
-    
     NSMutableArray *arguments=[[[NSMutableArray alloc]initWithCapacity:10]autorelease];
 
     id userDefaults=[[NSUserDefaultsController sharedUserDefaultsController] values];
@@ -702,6 +606,9 @@ NS_ENDHANDLER
             
 	}
     
+    //20081213
+    [arguments addObject:@"--progress=dot:binary"]; 
+    
 	//20050910
 	NSString* otherWgetOptions=[userDefaults valueForKey:@"otherWgetOptions"];
 	if( otherWgetOptions && ([otherWgetOptions isEqualToString:@""]==NO)){
@@ -710,8 +617,7 @@ NS_ENDHANDLER
 	}else{
 		//NSLOG(@"otherWgetOptions is null");
 	}
-	 	    
-                
+
 	// url 
 	[arguments addObject:url];
     
@@ -766,7 +672,6 @@ NS_ENDHANDLER
     
     [contents appendFormat:COCOAWGET_WGETRC_HEADER];
     
-    
     id userDefaults=[[NSUserDefaultsController sharedUserDefaultsController] values];
 
     BOOL useProxy=[[userDefaults valueForKey:@"useProxy"] boolValue];
@@ -795,9 +700,6 @@ NS_ENDHANDLER
     }
     //NSLog(contents);
     
-
-    [contents writeToFile:filePath atomically:YES];
+    [contents writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:NULL ];
 }
-
-
 @end
