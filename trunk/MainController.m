@@ -5,11 +5,11 @@
 
 - (IBAction)showHelp:(id)sender
 {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.geocities.co.jp/SiliconValley/8916/Macintosh/CocoaWgetHelp.html"]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://cocoawget.nobody.jp/help/"]];
 }
 - (IBAction)showWgetOptionHelp:(id)sender
 {
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.geocities.co.jp/SiliconValley/8916/Macintosh/WgetHelp.html"]];
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://cocoawget.nobody.jp/help/WgetHelp.html"]];
 }
 -(void)setDirectorySheetEnd:(NSOpenPanel*)sheet
                             returnCode:(int) returnCode
