@@ -1,16 +1,13 @@
 #import "CWArrayController.h"
 #import "DownloadItem.h"
 
-
 @interface CWArrayController (Private)
     -(void)updateLogView:(DownloadItem*)item;
     -(void)timerFired;
     -(void)loadDrawerSize;
     -(void)saveDrawerSize;
-    -(void)updateButton;
-    
+    -(void)updateButton;    
 @end
-
 
 @implementation CWArrayController
 -(void)awakeFromNib
@@ -19,12 +16,9 @@
     
     [tableView registerForDraggedTypes:[NSArray arrayWithObjects:NSStringPboardType,nil]];
 
-    
-    
     // load apple script
     NSString *filePath=[[[NSBundle mainBundle]resourcePath]
     stringByAppendingPathComponent : @"GetURLFromSafari.scpt" ];
-
     
     NSURL *fileURL=[NSURL fileURLWithPath:filePath];
     
@@ -41,12 +35,10 @@
 
     [self loadDrawerSize];
     
-    
     //start timer
     id userDefaults=[[NSUserDefaultsController sharedUserDefaultsController] values];
     BOOL autoDownload=[[userDefaults valueForKey:@"autoDownload"]boolValue];
     if(autoDownload) [self startTimer];
-
    
 }
 
@@ -65,7 +57,6 @@
     }
     [self saveList];
     
-    
     //clean list
     NSMutableArray *list=[self content];
     int i;
@@ -77,7 +68,6 @@
     }
     [list removeAllObjects];
     
-    
     [appleScript release];
 }
 
@@ -87,9 +77,6 @@
     [self clear];
     [super dealloc];
 }
-
-
-
 
 #pragma mark  ------------------ timer --------------------
 -(void)startTimer
@@ -123,7 +110,6 @@
     if(!timer) return NO;
     else return [timer isValid];
 }
-
 
 -(void)loadList
 {
@@ -202,7 +188,6 @@
     NSLOG(@"CWArrayController::createUserDefaults");
     id userDefaults=[[NSUserDefaultsController sharedUserDefaultsController] values];
     if(userDefaults){
-    
         [userDefaults setValue:[NSNumber numberWithBool:YES] forKey:@"resume"];
         [userDefaults setValue:@"0" forKey:@"recursiveType"];
         [userDefaults setValue:@"~/Desktop" forKey:@"downloadFolder"];
@@ -210,13 +195,10 @@
         [userDefaults setValue:@"5" forKey:@"maxConnections"]; 
         [userDefaults setValue:@"2" forKey:@"recursiveLevel"]; 
         [userDefaults setValue:[NSNumber numberWithBool:YES] forKey:@"usePassiveFTP"]; 
-        
-        
         [userDefaults setValue:@"2.0" forKey:@"version"];
     }
 
 }
-
 
 /*
 http://homepage.mac.com/mkino2/cocoaProg/Foundation/NSString/NSString.html#parseStringAsLines
@@ -273,96 +255,45 @@ http://domain/image999.jpg
 // return array of NSString
 -(NSArray*) expandSequencialURL:(NSString*)url
 {
+    NSUInteger pos1=[url rangeOfString:@"[" options:NSLiteralSearch].location;
+    NSUInteger pos2=[url rangeOfString:@"]" options:NSLiteralSearch].location;
+    NSUInteger pos3=[url rangeOfString:@"-" options:NSLiteralSearch].location;
+    //NSLOG(@"pos %d %d %d",pos1,pos2,pos3);
     NSMutableArray* array=nil;
-    int pos1=-1;// position of [
-    int pos2=-1;// position of ]
-    int pos3=-1;// position of -
-    int len=[url cStringLength];
-    BOOL isExpanded=NO;
-    char *cStr=(char*)malloc((len+2)*sizeof(char));
-    int i;
-    [url getCString:cStr];
-    for(i=0;i<len;i++){
-        char c=cStr[i];
-        if(c=='[') pos1=i;
-        if((c==']')&&(pos1!=-1)) pos2=i;
-    }
-    if((pos1!=-1)&&(pos2!=-1)){
-        for(i=pos1+1;i<pos2;i++){
-            if(cStr[i]=='-') pos3=i;
+    if(pos1<pos3 && pos3<pos2){
+        int length1=pos3-pos1-1;
+        int length2=pos2-pos3-1;
+        int length=length2;
+        if(length1>length2) length=length1;
+        NSString* s1=[url substringWithRange:NSMakeRange(pos1+1,length1)];
+        NSString* s2=[url substringWithRange:NSMakeRange(pos3+1,length2)];
+        int startNum=[s1 intValue];
+        int endNum=[s2 intValue];
+        if(startNum>endNum){
+            int tmp=startNum;
+            startNum=endNum;
+            endNum=tmp;
         }
-        if(pos3!=-1){
-            BOOL isValid=YES;
-            for(i=pos1+1;i<pos2;i++){
-                if(i!=pos3){
-                    if(isdigit(cStr[i])==0){
-                        isValid=NO;
-                        break;
-                    }
-                }
+        //NSLOG(@"%d %d",startNum,endNum);
+        if(startNum!=0 && endNum!=0){
+            NSString* header=[url substringToIndex:pos1];
+            NSString* footer=[url substringFromIndex:pos2+1];
+            NSLOG(header);
+            NSLOG(footer);
+            char formatStr[4096];
+            char digitStr[4096];
+            sprintf(formatStr,"%%.%dd",length);
+            array=[NSMutableArray arrayWithCapacity:100];
+            for(int i=startNum;i<=endNum;i++){
+                sprintf(digitStr,formatStr,i);
+                NSString* digit=[NSString stringWithCString:digitStr encoding:NSUTF8StringEncoding];
+                NSString* aURL=[header stringByAppendingString:digit];
+                aURL=[aURL stringByAppendingString:footer];
+                [array addObject:aURL];
             }
-            if(isValid){
-                char startNumStr[4096];
-                char endNumStr[4096];
-                for(i=0;i<pos3-pos1-1;i++){
-                    startNumStr[i]=cStr[i+pos1+1];
-                }
-                startNumStr[i]='\0';
-                for(i=0;i<pos2-pos3-1;i++){
-                    endNumStr[i]=cStr[i+pos3+1];
-                }
-                endNumStr[i]='\0';
-                int startNum=atoi(startNumStr);
-                int endNum=atoi(endNumStr);
-                                
-                if(startNum>endNum){
-                    int tmp=startNum;
-                    startNum=endNum;
-                    endNum=tmp;
-                }
-                //NSLOG(@"pos %d %d %d",pos1,pos2,pos3);
-                //NSLOG([NSString stringWithCString:startNumStr]);
-                //NSLOG([NSString stringWithCString:endNumStr]);
-                
-
-                //NSLOG(@"range %d - %d",startNum,endNum);
-                int length1=pos3-pos1-1;
-                int length2=pos2-pos3-1;
-                int length=length2;
-                if(length1>length2) length=length1;
-                char formatStr[4096];
-                char digitStr[4096];
-                char headerStr[4096];
-                char footerStr[4096];
-                char str[4096];
-                
-                for(i=0;i<pos1;i++){
-                    headerStr[i]=cStr[i];
-                }
-                headerStr[i]='\0';
-                
-                for(i=0;i<len-pos2-1;i++){
-                    footerStr[i]=cStr[i+pos2+1];
-                }
-                footerStr[i]='\0';
-                //NSLOG(@"length=%d",length);
-                sprintf(formatStr,"%%.%dd",length);
-                array=[NSMutableArray arrayWithCapacity:100];	    
-                for(i=startNum;i<=endNum;i++){
-                    sprintf(digitStr,formatStr,i);
-                    sprintf(str,"%s%s%s",headerStr,digitStr,footerStr);
-                    NSString* aURL=[NSString stringWithCString:str];
-                    //NSLOG(aURL);
-                    [array addObject:aURL];
-                }
-                isExpanded=YES;
-            }
-            
         }
     }
-    free(cStr);
-    
-    if(isExpanded==NO){
+    if(array==nil || [array count]==0){
         array=[NSArray arrayWithObject:url];
     }
     return array;
@@ -734,8 +665,6 @@ http://domain/image999.jpg
     }
 }
 
-
-
 -(void)timerFired
 {
     //NSLOG(@"timerFired");
@@ -743,8 +672,6 @@ http://domain/image999.jpg
     if(![self isTimerRunning]) return;
     if(isChecking) return;
     isChecking=YES;
-    
-    
     NSArray* list=[self content];
     int i;
     for(i=0;i<[list count];i++){
@@ -754,9 +681,7 @@ http://domain/image999.jpg
             break;
         }
     }
-    
     isChecking=NO;
-    
 }
 
 -(BOOL)isSarariRunning
@@ -782,19 +707,8 @@ http://domain/image999.jpg
     NSAppleEventDescriptor *result;
     result = [appleScript executeAndReturnError: &err];
     if(result){
-        /*
-        NSAppleEventDescriptor *unicodeResult=[result coerceToDescriptorType:typeUnicodeText];
-        NSData* unicodeData = [unicodeResult data];
-        NSString* resultString = [[[NSString alloc] initWithCharacters:
-        (unichar*)[unicodeData bytes] length:[unicodeData length] / sizeof(unichar)]autorelease];
-        
-        NSLOG(resultString);
-        referer=resultString;
-        */
         referer=[result stringValue];
         NSLOG(referer);
-        
-
         id userDefaults=[[NSUserDefaultsController sharedUserDefaultsController] values];
         if(referer)[userDefaults setValue:referer forKey:@"referer"];
     }
@@ -846,16 +760,12 @@ http://domain/image999.jpg
         }
     }
     
-    
-    
-    
     //remove finished file
     int removeType=[[userDefaults valueForKey:@"removeDownloadOption"]intValue];
     if((removeType==2) && ([[item valueForKey:@"status"] isEqualToString:FINISHED])){
         [self removeObject:item];
     }
     
-
     BOOL autoDownload=[[userDefaults valueForKey:@"autoDownload"]boolValue];
     if(autoDownload==NO){
         if([[self content]count]==0){
@@ -938,10 +848,7 @@ http://domain/image999.jpg
     if([selectedObjects count]==1){
     
         //update GUI
-        
-        
         DownloadItem* data=[selectedObjects objectAtIndex:0];
-        
         
         [startButton setEnabled:YES];
         if([data isDownloading]){
@@ -1011,7 +918,6 @@ http://domain/image999.jpg
     [userDefaults setValue:[NSNumber numberWithBool:NO] forKey:@"showLog"];
 }
 
-
 -(void)loadDrawerSize
 {
     //update drawer size
@@ -1034,7 +940,6 @@ http://domain/image999.jpg
     [userDefaults setValue:[NSNumber numberWithInt:h] forKey:@"drawerHeight"];
 }
 
-
 #pragma mark  ------------------ tableView --------------------
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
@@ -1042,8 +947,7 @@ http://domain/image999.jpg
     
     [self updateButton];
     [self updateDownloadInfo];
-    
-    
+        
     [self updateLogView:nil];
 }
 
@@ -1065,22 +969,18 @@ http://domain/image999.jpg
     else return NSDragOperationCopy;
 }
 
-
 - (BOOL)tableView:(NSTableView*)tv acceptDrop:(id <NSDraggingInfo>)info row:(int)row dropOperation:(NSTableViewDropOperation)op
 {
     //NSLOG(@"acceptDrop %d->%d",draggingIndex,row);
     
     id draggingSource=[info draggingSource];
         
-    
     NSPasteboard *myPasteboard=[info draggingPasteboard];
     
     NSArray *typeArray=[NSArray arrayWithObjects:NSStringPboardType,nil];
     NSString *availableType;
     NSArray *filesList;
 
-    
-    
     // find the best match of the types we'll accept and what's actually on the pasteboard
     availableType=[myPasteboard availableTypeFromArray:typeArray];
     //NSLOG(@"availableType:%@",availableType);
@@ -1144,8 +1044,7 @@ http://domain/image999.jpg
     
     draggingIndex=-1;
     //[self updateListView];
-    
-    
+        
     return isAccepted;
 }
 
@@ -1185,8 +1084,6 @@ http://domain/image999.jpg
     [tableView selectRow:index byExtendingSelection:NO];
     
     return [pboard setPropertyList:filesList forType:availableType];
-
 }
-
 
 @end
