@@ -3,50 +3,45 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 44;
+	objectVersion = 45;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8285465C05CBB5FC003C9F95 /* GetURLFromSafari.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 8285465B05CBB5FC003C9F95 /* GetURLFromSafari.scpt */; };
-		82956D0305BD6B3500C516A0 /* MainController.h in Headers */ = {isa = PBXBuildFile; fileRef = 82956D0105BD6B3500C516A0 /* MainController.h */; };
-		82956D0405BD6B3500C516A0 /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82956D0205BD6B3500C516A0 /* MainController.m */; };
-		82AB8FE905CB786F001C95E3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 82AB8FE805CB786F001C95E3 /* Localizable.strings */; };
-		82B3E70305BC230100248548 /* CWArrayController.h in Headers */ = {isa = PBXBuildFile; fileRef = 82B3E70105BC230100248548 /* CWArrayController.h */; };
-		82B3E70405BC230100248548 /* CWArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B3E70205BC230100248548 /* CWArrayController.m */; };
-		82B3E71805BC26DA00248548 /* DownloadItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 82B3E71605BC26DA00248548 /* DownloadItem.h */; };
-		82B3E71905BC26DA00248548 /* DownloadItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B3E71705BC26DA00248548 /* DownloadItem.m */; };
-		82B3E78005BC2DAE00248548 /* CocoaWget.icns in Resources */ = {isa = PBXBuildFile; fileRef = 82B3E77F05BC2DAE00248548 /* CocoaWget.icns */; };
-		82B3E7F105BC3EC800248548 /* wget in Resources */ = {isa = PBXBuildFile; fileRef = 82B3E7F005BC3EC800248548 /* wget */; };
-		8D1107280486CEB800E47090 /* CocoaWget_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32CA4F630368D1EE00C91783 /* CocoaWget_Prefix.pch */; };
-		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
-		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
+		82763F7D0EF3A8F000C136A0 /* CWArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82763F770EF3A8F000C136A0 /* CWArrayController.m */; };
+		82763F7E0EF3A8F000C136A0 /* DownloadItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 82763F790EF3A8F000C136A0 /* DownloadItem.m */; };
+		82763F7F0EF3A8F000C136A0 /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82763F7C0EF3A8F000C136A0 /* MainController.m */; };
+		82763FA10EF3AA0C00C136A0 /* CocoaWget.icns in Resources */ = {isa = PBXBuildFile; fileRef = 82763FA00EF3AA0C00C136A0 /* CocoaWget.icns */; };
+		82763FD10EF3AE5200C136A0 /* wget in Resources */ = {isa = PBXBuildFile; fileRef = 82763FD00EF3AE5200C136A0 /* wget */; };
+		82763FDB0EF3AEB300C136A0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 82763FDA0EF3AEB300C136A0 /* Localizable.strings */; };
+		827640690EF3B70E00C136A0 /* GetURLFromSafari.scpt in Resources */ = {isa = PBXBuildFile; fileRef = 82763F7A0EF3A8F000C136A0 /* GetURLFromSafari.scpt */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		1DDD58150DA1D0A300B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* CocoaWget_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoaWget_Prefix.pch; sourceTree = "<group>"; };
-		8285465B05CBB5FC003C9F95 /* GetURLFromSafari.scpt */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.scpt; path = GetURLFromSafari.scpt; sourceTree = "<group>"; };
-		828EB82D0BDE48590002F474 /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/MainMenu.nib; sourceTree = "<group>"; };
-		828EB8400BDE48BD0002F474 /* German */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Localizable.strings; sourceTree = "<group>"; };
-		82956D0105BD6B3500C516A0 /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = MainController.h; sourceTree = "<group>"; };
-		82956D0205BD6B3500C516A0 /* MainController.m */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.objc; path = MainController.m; sourceTree = "<group>"; };
-		82AB8F6D05CB6165001C95E3 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Japanese; path = Japanese.lproj/MainMenu.nib; sourceTree = "<group>"; };
-		82AB8FDF05CB784D001C95E3 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		82AB8FF405CB7885001C95E3 /* Japanese */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/Localizable.strings; sourceTree = "<group>"; };
-		82B3E70105BC230100248548 /* CWArrayController.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = CWArrayController.h; sourceTree = "<group>"; };
-		82B3E70205BC230100248548 /* CWArrayController.m */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.objc; path = CWArrayController.m; sourceTree = "<group>"; };
-		82B3E71605BC26DA00248548 /* DownloadItem.h */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.h; path = DownloadItem.h; sourceTree = "<group>"; };
-		82B3E71705BC26DA00248548 /* DownloadItem.m */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = sourcecode.c.objc; path = DownloadItem.m; sourceTree = "<group>"; };
-		82B3E77F05BC2DAE00248548 /* CocoaWget.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = CocoaWget.icns; sourceTree = "<group>"; };
-		82B3E7F005BC3EC800248548 /* wget */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = wget; sourceTree = "<group>"; };
-		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		82763F760EF3A8F000C136A0 /* CWArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWArrayController.h; sourceTree = "<group>"; };
+		82763F770EF3A8F000C136A0 /* CWArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWArrayController.m; sourceTree = "<group>"; };
+		82763F780EF3A8F000C136A0 /* DownloadItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadItem.h; sourceTree = "<group>"; };
+		82763F790EF3A8F000C136A0 /* DownloadItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadItem.m; sourceTree = "<group>"; };
+		82763F7A0EF3A8F000C136A0 /* GetURLFromSafari.scpt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.scpt; path = GetURLFromSafari.scpt; sourceTree = "<group>"; };
+		82763F7B0EF3A8F000C136A0 /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainController.h; sourceTree = "<group>"; };
+		82763F7C0EF3A8F000C136A0 /* MainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainController.m; sourceTree = "<group>"; };
+		82763FA00EF3AA0C00C136A0 /* CocoaWget.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = CocoaWget.icns; sourceTree = "<group>"; };
+		82763FC20EF3AB2700C136A0 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		82763FC30EF3AB2C00C136A0 /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		82763FD00EF3AE5200C136A0 /* wget */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = wget; sourceTree = "<group>"; };
+		82763FD80EF3AEAE00C136A0 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		82763FDD0EF3AEE200C136A0 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/Localizable.strings; sourceTree = "<group>"; };
+		82763FDE0EF3AEF300C136A0 /* German */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* CocoaWget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaWget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -65,12 +60,12 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				82956D0105BD6B3500C516A0 /* MainController.h */,
-				82956D0205BD6B3500C516A0 /* MainController.m */,
-				82B3E70105BC230100248548 /* CWArrayController.h */,
-				82B3E70205BC230100248548 /* CWArrayController.m */,
-				82B3E71605BC26DA00248548 /* DownloadItem.h */,
-				82B3E71705BC26DA00248548 /* DownloadItem.m */,
+				82763F760EF3A8F000C136A0 /* CWArrayController.h */,
+				82763F770EF3A8F000C136A0 /* CWArrayController.m */,
+				82763F780EF3A8F000C136A0 /* DownloadItem.h */,
+				82763F790EF3A8F000C136A0 /* DownloadItem.m */,
+				82763F7B0EF3A8F000C136A0 /* MainController.h */,
+				82763F7C0EF3A8F000C136A0 /* MainController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -86,8 +81,9 @@
 		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
@@ -124,13 +120,12 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8285465B05CBB5FC003C9F95 /* GetURLFromSafari.scpt */,
-				82B3E7F005BC3EC800248548 /* wget */,
-				82B3E77F05BC2DAE00248548 /* CocoaWget.icns */,
+				82763F7A0EF3A8F000C136A0 /* GetURLFromSafari.scpt */,
+				82763FD00EF3AE5200C136A0 /* wget */,
+				82763FA00EF3AA0C00C136A0 /* CocoaWget.icns */,
 				8D1107310486CEB800E47090 /* Info.plist */,
-				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
-				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
-				82AB8FE805CB786F001C95E3 /* Localizable.strings */,
+				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
+				82763FDA0EF3AEB300C136A0 /* Localizable.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -146,26 +141,11 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		8D1107270486CEB800E47090 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8D1107280486CEB800E47090 /* CocoaWget_Prefix.pch in Headers */,
-				82B3E70305BC230100248548 /* CWArrayController.h in Headers */,
-				82B3E71805BC26DA00248548 /* DownloadItem.h in Headers */,
-				82956D0305BD6B3500C516A0 /* MainController.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
 		8D1107260486CEB800E47090 /* CocoaWget */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 82E062CB08AD8FA50058ECB1 /* Build configuration list for PBXNativeTarget "CocoaWget" */;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "CocoaWget" */;
 			buildPhases = (
-				8D1107270486CEB800E47090 /* Headers */,
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
@@ -185,8 +165,8 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 82E062CF08AD8FA50058ECB1 /* Build configuration list for PBXProject "CocoaWget" */;
-			compatibilityVersion = "Xcode 3.0";
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "CocoaWget" */;
+			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CocoaWget */;
 			projectDirPath = "";
@@ -202,12 +182,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
-				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
-				82B3E78005BC2DAE00248548 /* CocoaWget.icns in Resources */,
-				82B3E7F105BC3EC800248548 /* wget in Resources */,
-				82AB8FE905CB786F001C95E3 /* Localizable.strings in Resources */,
-				8285465C05CBB5FC003C9F95 /* GetURLFromSafari.scpt in Resources */,
+				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
+				82763FA10EF3AA0C00C136A0 /* CocoaWget.icns in Resources */,
+				827640690EF3B70E00C136A0 /* GetURLFromSafari.scpt in Resources */,
+				82763FD10EF3AE5200C136A0 /* wget in Resources */,
+				82763FDB0EF3AEB300C136A0 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,39 +198,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
-				82B3E70405BC230100248548 /* CWArrayController.m in Sources */,
-				82B3E71905BC26DA00248548 /* DownloadItem.m in Sources */,
-				82956D0405BD6B3500C516A0 /* MainController.m in Sources */,
+				82763F7D0EF3A8F000C136A0 /* CWArrayController.m in Sources */,
+				82763F7E0EF3A8F000C136A0 /* DownloadItem.m in Sources */,
+				82763F7F0EF3A8F000C136A0 /* MainController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+		1DDD58140DA1D0A300B32029 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				089C165DFE840E0CC02AAC07 /* English */,
+				1DDD58150DA1D0A300B32029 /* English */,
+				82763FC20EF3AB2700C136A0 /* Japanese */,
+				82763FC30EF3AB2C00C136A0 /* German */,
 			);
-			name = InfoPlist.strings;
+			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
-		29B97318FDCFA39411CA2CEA /* MainMenu.nib */ = {
+		82763FDA0EF3AEB300C136A0 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				29B97319FDCFA39411CA2CEA /* English */,
-				82AB8F6D05CB6165001C95E3 /* Japanese */,
-				828EB82D0BDE48590002F474 /* German */,
-			);
-			name = MainMenu.nib;
-			sourceTree = "<group>";
-		};
-		82AB8FE805CB786F001C95E3 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				82AB8FDF05CB784D001C95E3 /* English */,
-				82AB8FF405CB7885001C95E3 /* Japanese */,
-				828EB8400BDE48BD0002F474 /* German */,
+				82763FD80EF3AEAE00C136A0 /* English */,
+				82763FDD0EF3AEE200C136A0 /* Japanese */,
+				82763FDE0EF3AEF300C136A0 /* German */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -259,173 +230,91 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		82E062CC08AD8FA50058ECB1 /* Development */ = {
+		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
-				DEBUGGING_SYMBOLS = YES;
-				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_ENABLE_TRIGRAPHS = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CocoaWget_Prefix.pch;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
-				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = "";
-				OPTIMIZATION_CFLAGS = "-O0";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = CocoaWget;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				WRAPPER_EXTENSION = app;
-				ZERO_LINK = YES;
 			};
-			name = Development;
+			name = Debug;
 		};
-		82E062CD08AD8FA50058ECB1 /* Deployment */ = {
+		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-				DEAD_CODE_STRIPPING = YES;
-				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_DYNAMIC_NO_PIC = YES;
-				GCC_ENABLE_CPP_EXCEPTIONS = NO;
-				GCC_ENABLE_CPP_RTTI = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_ENABLE_TRIGRAPHS = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CocoaWget_Prefix.pch;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
-				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = "";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRESERVE_DEAD_CODE_INITS_AND_TERMS = YES;
 				PRODUCT_NAME = CocoaWget;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				WRAPPER_EXTENSION = app;
-				ZERO_LINK = NO;
 			};
-			name = Deployment;
+			name = Release;
 		};
-		82E062CE08AD8FA50058ECB1 /* Default */ = {
+		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_ENABLE_TRIGRAPHS = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = CocoaWget_Prefix.pch;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
-				GCC_WARN_UNKNOWN_PRAGMAS = NO;
-				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = "";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = CocoaWget;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				WRAPPER_EXTENSION = app;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+				VALID_ARCHS = "i386 ppc";
 			};
-			name = Default;
+			name = Debug;
 		};
-		82E062D008AD8FA50058ECB1 /* Development */ = {
+		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				GCC_DYNAMIC_NO_PIC = YES;
-				GCC_FAST_OBJC_DISPATCH = YES;
-				GCC_MODEL_TUNING = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
-			};
-			name = Development;
-		};
-		82E062D108AD8FA50058ECB1 /* Deployment */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = (
-					i386,
-					ppc,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DEAD_CODE_STRIPPING = YES;
-				GCC_DYNAMIC_NO_PIC = YES;
-				GCC_FAST_OBJC_DISPATCH = YES;
+				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LLVM_LTO = YES;
+				PREBINDING = NO;
 				PRESERVE_DEAD_CODE_INITS_AND_TERMS = YES;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
-				VALID_ARCHS = i386;
+				SDKROOT = macosx10.5;
+				VALID_ARCHS = "i386 ppc";
 			};
-			name = Deployment;
-		};
-		82E062D208AD8FA50058ECB1 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
-			};
-			name = Default;
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		82E062CB08AD8FA50058ECB1 /* Build configuration list for PBXNativeTarget "CocoaWget" */ = {
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "CocoaWget" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				82E062CC08AD8FA50058ECB1 /* Development */,
-				82E062CD08AD8FA50058ECB1 /* Deployment */,
-				82E062CE08AD8FA50058ECB1 /* Default */,
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Release;
 		};
-		82E062CF08AD8FA50058ECB1 /* Build configuration list for PBXProject "CocoaWget" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "CocoaWget" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				82E062D008AD8FA50058ECB1 /* Development */,
-				82E062D108AD8FA50058ECB1 /* Deployment */,
-				82E062D208AD8FA50058ECB1 /* Default */,
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
