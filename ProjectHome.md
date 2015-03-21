@@ -1,0 +1,1 @@
+CocoaWget is a GUI client for GNU wget.
