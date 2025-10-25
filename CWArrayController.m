@@ -687,10 +687,9 @@ http://domain/image999.jpg
 -(BOOL)isSarariRunning
 {
     BOOL flag=NO;
-    NSEnumerator *e=[[[NSWorkspace sharedWorkspace] launchedApplications] objectEnumerator];
-    id cur;
-    while (cur=[e nextObject]) {
-        if ([[cur objectForKey:@"NSApplicationName"] isEqualToString:@"Safari"]) {
+    NSArray *runningApps = [[NSWorkspace sharedWorkspace] runningApplications];
+    for (NSRunningApplication *app in runningApps) {
+        if ([[app localizedName] isEqualToString:@"Safari"]) {
             flag=YES;
             break;
         }
@@ -784,7 +783,7 @@ http://domain/image999.jpg
     NSAppleScript *script;
     
     CFURLRef fileURL = CFURLCreateWithFileSystemPath(NULL, (CFStringRef)filePath, kCFURLPOSIXPathStyle, NO);
-    NSString *hfsPath = (NSString *)CFURLCopyFileSystemPath(fileURL, kCFURLHFSPathStyle);
+    NSString *hfsPath = (NSString *)CFBridgingRelease(CFURLCopyFileSystemPath(fileURL, kCFURLHFSPathStyle));
     CFRelease(fileURL);
         
     scriptText = [NSString stringWithFormat:@"tell application \"Finder\" to set comment of item \"%@\" to \"%@\"", hfsPath, comment];
