@@ -12,11 +12,11 @@
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://cocoawget.nobody.jp/help/WgetHelp.html"]];
 }
 -(void)setDirectorySheetEnd:(NSOpenPanel*)sheet
-                            returnCode:(int) returnCode
+                            returnCode:(NSModalResponse) returnCode
                             contextInfo:(void*)contextInfo
 {
-    if(returnCode==NSOKButton){
-        NSString *downloadFolder=[[sheet filename] copy];
+    if(returnCode==NSModalResponseOK){
+        NSString *downloadFolder=[[[sheet URL] path] copy];
         [[[NSUserDefaultsController sharedUserDefaultsController] values] setValue:downloadFolder forKey:@"downloadFolder"];
     }                           
 }
@@ -35,10 +35,11 @@
     
     if(downloadFolder) defaultDirectory=downloadFolder;
     else defaultDirectory=[NSString stringWithFormat:@"%@",NSHomeDirectory()];
-    [dialog beginSheetForDirectory:defaultDirectory
-    file:nil types:nil modalForWindow:prefWindow modalDelegate:self 
-    didEndSelector: @selector(setDirectorySheetEnd:returnCode:contextInfo:)
-    contextInfo:nil];
+    
+    [dialog setDirectoryURL:[NSURL fileURLWithPath:defaultDirectory]];
+    [dialog beginSheetModalForWindow:prefWindow completionHandler:^(NSModalResponse result) {
+        [self setDirectorySheetEnd:dialog returnCode:result contextInfo:nil];
+    }];
 }
 
 
@@ -58,8 +59,8 @@
     //[ alert setDelegate: self ];
     
     //[ alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:@selector(deleteConfirmSheedDidEnd: returnCode: contextInfo:) contextInfo:nil ];
-    int result = [ alert runModal ];
-    if(result==NSAlertDefaultReturn) return YES;
+    NSModalResponse result = [ alert runModal ];
+    if(result==NSAlertFirstButtonReturn) return YES;
     else return NO;
 
 }
