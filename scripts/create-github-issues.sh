@@ -115,7 +115,8 @@ create_issue \
 Reemplazar componentes de UI eliminados y adaptar al lenguaje visual de Tahoe.
 
 - [ ] Eliminar `NSDrawer` (obsoleto): mover el log a `NSSplitView`, panel colapsable o sheet.
-- [ ] Revisar `MainMenu.xib` en Xcode actual en las 3 localizaciones (English, German, Japanese).
+- [ ] Revisar `MainMenu.xib` en Xcode actual en las 4 localizaciones (English, German, Japanese, Spanish).
+- [ ] Traducir al español `Spanish.lproj/MainMenu.xib` (hoy es copia del inglés; las strings ya están traducidas). Valorar migrar a Base Internationalization.
 - [ ] Adoptar Auto Layout si hay autoresizing masks frágiles.
 - [ ] Migrar el icono a un Asset Catalog (.xcassets); preparar estilo Liquid Glass de Tahoe.
 - [ ] Verificar contraste/colores en modo oscuro y con el diseño de macOS 26.

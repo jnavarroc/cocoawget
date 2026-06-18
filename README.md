@@ -45,7 +45,7 @@ abrir el Terminal.
 - **Acciones al finalizar**: abrir el archivo descargado, guardar la URL de origen como comentario
   Finder del archivo (vía AppleScript) y eliminar de la lista los elementos completados.
 - **Cajón de registro (log)** que muestra la salida en vivo de wget para el elemento seleccionado.
-- **Localización** en inglés, alemán y japonés.
+- **Localización** en inglés, alemán, japonés y **español**.
 
 ---
 
@@ -174,11 +174,51 @@ cocoawget/
 ├── GetURLFromSafari.scpt      AppleScript para obtener el Referer de Safari
 ├── buildwget.sh               Script para compilar el binario wget
 ├── wget                       Binario de wget empaquetado (¡obsoleto: i386/ppc!)
-├── English.lproj/             Localización inglesa (xib + strings)
+├── English.lproj/             Localización inglesa (xib + strings) — región de desarrollo
 ├── German.lproj/              Localización alemana
 ├── Japanese.lproj/            Localización japonesa
+├── Spanish.lproj/             Localización española (xib + strings)
+├── scripts/                   Utilidades (p. ej. create-github-issues.sh)
 └── CocoaWget.xcodeproj/       Proyecto de Xcode
 ```
+
+---
+
+## Localización
+
+CocoaWget está localizado en **inglés, alemán, japonés y español**. Cada idioma vive en una carpeta
+`<Idioma>.lproj/` (se usan los nombres heredados de macOS — `English`, `German`, `Japanese`,
+`Spanish` — en vez de los códigos ISO `en`/`de`/`ja`/`es`, por coherencia con el proyecto original).
+El inglés es la **región de desarrollo** (`CFBundleDevelopmentRegion`) y actúa como respaldo.
+
+Cada `*.lproj/` contiene dos piezas:
+
+| Archivo | Qué contiene | Cómo se usa |
+|---|---|---|
+| `Localizable.strings` | Cadenas en tiempo de ejecución (estados de descarga, alertas, botones). | Resueltas en el código con `NSLocalizedString(...)` (ver [DownloadItem.h](DownloadItem.h) y [CWArrayController.m](CWArrayController.m)). |
+| `MainMenu.xib` | La interfaz (ventana principal, preferencias y menús). | Cargada por AppKit según el idioma del sistema. |
+
+### Mantener el español (y cualquier idioma) al día
+
+1. **Cadenas (`Localizable.strings`)** — es la parte que el código consume. Las claves deben ser
+   **idénticas** en todos los idiomas; solo cambia el valor de la derecha. Si añades un
+   `NSLocalizedString(@"NuevaClave", @"")` en el código, **añade `"NuevaClave"="…";` a las cuatro
+   localizaciones** ([English](English.lproj/Localizable.strings),
+   [German](German.lproj/Localizable.strings), [Japanese](Japanese.lproj/Localizable.strings),
+   [Spanish](Spanish.lproj/Localizable.strings)). Guarda en **UTF‑8**.
+2. **Interfaz (`MainMenu.xib`)** — el `Spanish.lproj/MainMenu.xib` actual es **una copia del de
+   inglés**: la app ya carga la localización española, pero los rótulos de menús y ventanas siguen
+   en inglés hasta traducirlos en Xcode / Interface Builder. Traducir el XIB es una tarea aparte
+   (ver [ROADMAP.md](ROADMAP.md) → Fase 3).
+3. **Registro en el proyecto** — un idioma nuevo debe añadirse a los `PBXVariantGroup` de
+   `MainMenu.xib` y `Localizable.strings` en [project.pbxproj](CocoaWget.xcodeproj/project.pbxproj)
+   (o, más cómodo, desde Xcode: *Project ▸ Info ▸ Localizations ▸ +*).
+
+> Comprobación rápida de paridad de claves entre dos idiomas:
+> ```sh
+> diff <(grep -oE '^"[^"]+"' English.lproj/Localizable.strings | sort) \
+>      <(grep -oE '^"[^"]+"' Spanish.lproj/Localizable.strings | sort)
+> ```
 
 ---
 

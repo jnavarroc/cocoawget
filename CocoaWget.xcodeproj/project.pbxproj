@@ -37,10 +37,12 @@
 		82763FA00EF3AA0C00C136A0 /* CocoaWget.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = CocoaWget.icns; sourceTree = "<group>"; };
 		82763FC20EF3AB2700C136A0 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		82763FC30EF3AB2C00C136A0 /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		82763FC40EF3AB3000C136A0 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Spanish; path = Spanish.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		82763FD00EF3AE5200C136A0 /* wget */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = wget; sourceTree = "<group>"; };
 		82763FD80EF3AEAE00C136A0 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		82763FDD0EF3AEE200C136A0 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/Localizable.strings; sourceTree = "<group>"; };
 		82763FDE0EF3AEF300C136A0 /* German */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Localizable.strings; sourceTree = "<group>"; };
+		82763FDF0EF3AF0000C136A0 /* Spanish */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* CocoaWget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaWget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -213,6 +215,7 @@
 				1DDD58150DA1D0A300B32029 /* English */,
 				82763FC20EF3AB2700C136A0 /* Japanese */,
 				82763FC30EF3AB2C00C136A0 /* German */,
+				82763FC40EF3AB3000C136A0 /* Spanish */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 				82763FD80EF3AEAE00C136A0 /* English */,
 				82763FDD0EF3AEE200C136A0 /* Japanese */,
 				82763FDE0EF3AEF300C136A0 /* German */,
+				82763FDF0EF3AF0000C136A0 /* Spanish */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

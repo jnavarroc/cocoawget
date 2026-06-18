@@ -124,7 +124,11 @@ moderno.
 - [ ] **Eliminar `NSDrawer`** (obsoleto desde 10.13, no funciona como antes): mover el log a un
       `NSSplitView` lateral, un panel inferior colapsable o una hoja/ventana de inspección.
 - [ ] Revisar el `MainMenu.xib` en Xcode actual (puede requerir migración del formato de XIB) en
-      las tres localizaciones (`English`, `German`, `Japanese`).
+      las cuatro localizaciones (`English`, `German`, `Japanese`, `Spanish`).
+- [ ] **Traducir al español el `Spanish.lproj/MainMenu.xib`** (actualmente es una copia del XIB
+      inglés; las cadenas de `Localizable.strings` ya están traducidas). Idealmente, migrar a
+      *Base Internationalization* (`Base.lproj` + archivos `.strings` por idioma) para no mantener
+      un XIB por idioma. Ver la sección *Localización* del [README](README.md).
 - [ ] Adoptar **Auto Layout** si la ventana usa *autoresizing masks* frágiles.
 - [ ] Migrar el icono a un **Asset Catalog** (`.xcassets`) con todos los tamaños; opcionalmente
       preparar el icono para el nuevo estilo *Liquid Glass* de Tahoe.
