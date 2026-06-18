@@ -18,7 +18,7 @@
     if(returnCode==NSModalResponseOK){
         NSString *downloadFolder=[[[sheet URL] path] copy];
         [[[NSUserDefaultsController sharedUserDefaultsController] values] setValue:downloadFolder forKey:@"downloadFolder"];
-    }                           
+    }
 }
 
 
@@ -30,12 +30,12 @@
     dialog=[NSOpenPanel openPanel];
     [dialog setCanChooseDirectories:YES];
     [dialog setCanChooseFiles:NO];
-    
+
     NSString *downloadFolder=[[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"downloadFolder"];
-    
+
     if(downloadFolder) defaultDirectory=downloadFolder;
     else defaultDirectory=[NSString stringWithFormat:@"%@",NSHomeDirectory()];
-    
+
     [dialog setDirectoryURL:[NSURL fileURLWithPath:defaultDirectory]];
     [dialog beginSheetModalForWindow:prefWindow completionHandler:^(NSModalResponse result) {
         [self setDirectorySheetEnd:dialog returnCode:result contextInfo:nil];
@@ -45,24 +45,15 @@
 
 -(BOOL)confirmClose
 {
-    
-    NSAlert *alert = [ NSAlert alertWithMessageText: 
-        NSLocalizedString(@"Are you sure to quit application?",@"")  
-        defaultButton: NSLocalizedString(@"Yes",@"")  
-        alternateButton: NSLocalizedString(@"No",@"") 
-        otherButton: nil
-        informativeTextWithFormat: 
-        NSLocalizedString(@"Downloading item exists.",@"") ];
-    
-    //[ alert setShowsHelp: YES ];
-    //[ alert setAlertStyle: NSCriticalAlertStyle ];
-    //[ alert setDelegate: self ];
-    
-    //[ alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:@selector(deleteConfirmSheedDidEnd: returnCode: contextInfo:) contextInfo:nil ];
+    NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+    [alert setMessageText:NSLocalizedString(@"Are you sure to quit application?",@"")];
+    [alert setInformativeText:NSLocalizedString(@"Downloading item exists.",@"")];
+    [alert addButtonWithTitle:NSLocalizedString(@"Yes",@"")];
+    [alert addButtonWithTitle:NSLocalizedString(@"No",@"")];
+
     NSModalResponse result = [ alert runModal ];
     if(result==NSAlertFirstButtonReturn) return YES;
     else return NO;
-
 }
 
 - (BOOL)canCloseWindow
@@ -90,35 +81,35 @@
     [NSApp terminate:self];
 }
 
-- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)app 
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)app
 {
     //NSLog(@"applicationShouldTerminate");
     if([self canCloseWindow])
         return NSTerminateNow;
     else
-        return NSTerminateCancel; 
+        return NSTerminateCancel;
 }
 
 - (void)applicationDidBecomeActive/*windowDidBecomeKey*/:(NSNotification *)aNotification
 {
-    [mainWindow makeFirstResponder:url];    
+    [mainWindow makeFirstResponder:url];
 }
 
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
 {
 	if(!filename) return NO;
 	NSLog(@"application openfile");
-    NSLog(filename);
+    NSLog(@"%@", filename);
 	NSMutableString *filePath=[NSMutableString stringWithCapacity:0];
 	[filePath setString:filename];
 	[filePath replaceOccurrencesOfString:@"/:" withString:@"/" options:NSLiteralSearch range:NSMakeRange(0, [filePath length])];
 	[filePath replaceOccurrencesOfString:@":" withString:@"/" options:NSLiteralSearch range:NSMakeRange(0, [filePath length])];
 	NSError *error;
-    NSString *contents = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error]; 
-	NSLog(filePath);
-	NSLog(contents);
+    NSString *contents = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
+	NSLog(@"%@", filePath);
+	NSLog(@"%@", contents);
 	if(!contents) return NO;
-    
+
 	return YES;
 }
 @end

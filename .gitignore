@@ -1,0 +1,24 @@
+# Artefactos generados por buildwget.sh
+/build/
+*.tar.gz
+*.tar.gz.sha256
+*.tar.gz.sig
+gnu-keyring.gpg
+
+# Productos de compilación de Xcode
+build/
+DerivedData/
+*.xcarchive
+*.app
+*.dmg
+*.pkg
+
+# Estado de usuario de Xcode (no debería versionarse)
+xcuserdata/
+*.xcuserstate
+*.pbxuser
+*.mode1v3
+*.mode1
+
+# macOS
+.DS_Store

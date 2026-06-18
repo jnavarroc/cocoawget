@@ -14,7 +14,7 @@
 {
     [self loadList];
     
-    [tableView registerForDraggedTypes:[NSArray arrayWithObjects:NSStringPboardType,nil]];
+    [tableView registerForDraggedTypes:[NSArray arrayWithObjects:NSPasteboardTypeString,nil]];
 
     // load apple script
     NSString *filePath=[[[NSBundle mainBundle]resourcePath]
@@ -278,8 +278,8 @@ http://domain/image999.jpg
         if(startNum!=0 && endNum!=0){
             NSString* header=[url substringToIndex:pos1];
             NSString* footer=[url substringFromIndex:pos2+1];
-            NSLOG(header);
-            NSLOG(footer);
+            NSLOG(@"%@",header);
+            NSLOG(@"%@",footer);
             char formatStr[4096];
             char digitStr[4096];
             sprintf(formatStr,"%%.%dd",length);
@@ -707,7 +707,7 @@ http://domain/image999.jpg
     result = [appleScript executeAndReturnError: &err];
     if(result){
         referer=[result stringValue];
-        NSLOG(referer);
+        NSLOG(@"%@",referer);
         id userDefaults=[[NSUserDefaultsController sharedUserDefaultsController] values];
         if(referer)[userDefaults setValue:referer forKey:@"referer"];
     }
@@ -755,7 +755,7 @@ http://domain/image999.jpg
     if((openFile)/*&&(isRecursive==NO)*/){
         NSLOG(@"openFile: %@",filePath);
         if([[NSFileManager defaultManager]fileExistsAtPath:filePath]){
-            [[NSWorkspace sharedWorkspace] openFile:filePath];
+            [[NSWorkspace sharedWorkspace] openURL:[NSURL fileURLWithPath:filePath]];
         }
     }
     
@@ -976,7 +976,7 @@ http://domain/image999.jpg
         
     NSPasteboard *myPasteboard=[info draggingPasteboard];
     
-    NSArray *typeArray=[NSArray arrayWithObjects:NSStringPboardType,nil];
+    NSArray *typeArray=[NSArray arrayWithObjects:NSPasteboardTypeString,nil];
     NSString *availableType;
     NSArray *filesList;
 
@@ -1072,7 +1072,7 @@ http://domain/image999.jpg
     DownloadItem *item=[[self content] objectAtIndex:index];
     NSString* url=[item valueForKey:@"url"];
     
-    NSArray *typeArray=[NSArray arrayWithObjects:NSStringPboardType,nil];
+    NSArray *typeArray=[NSArray arrayWithObjects:NSPasteboardTypeString,nil];
     [pboard declareTypes:typeArray owner:nil];
 
     NSString *availableType=[pboard availableTypeFromArray:typeArray];
