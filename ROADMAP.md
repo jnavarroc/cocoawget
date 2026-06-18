@@ -95,20 +95,25 @@ moderno.
 
 **Objetivo:** eliminar APIs eliminadas/obsoletas y modernizar la gestión de memoria.
 
+> **Avance (sin Mac):** los cambios marcados `[x]` ya están aplicados como ediciones de código
+> deterministas y de bajo riesgo. **Pendiente de compilar/probar en macOS.**
+
 - [ ] **Migrar a ARC** (*Automatic Reference Counting*). Quitar `retain`/`release`/`autorelease`/
       `dealloc` manuales en [DownloadItem.m](DownloadItem.m) y [CWArrayController.m](CWArrayController.m).
 - [ ] Reemplazar las macros de excepción heredadas `NS_DURING`/`NS_HANDLER`/`NS_ENDHANDLER` por
       `@try/@catch` o por comprobaciones de error.
-- [ ] Sustituir `setKeys:triggerChangeNotificationsForDependentKey:` (eliminado) por
-      `+keyPathsForValuesAffectingValueForKey:` en `DownloadItem`.
-- [ ] `NSStringPboardType` → `NSPasteboardTypeString` en el arrastrar y soltar.
-- [ ] `NSTask`: `setLaunchPath:` + `launch` → `executableURL` + `launchAndReturnError:`.
+- [x] Sustituir `setKeys:triggerChangeNotificationsForDependentKey:` (eliminado) por
+      `+keyPathsForValuesAffectingFileName`/`...Icon` en `DownloadItem`.
+- [x] `NSStringPboardType` → `NSPasteboardTypeString` en el arrastrar y soltar.
+- [x] `NSTask`: `setLaunchPath:` + `launch` → `setExecutableURL:` + `launchAndReturnError:`
+      (con manejo de error).
 - [ ] `NSWorkspace iconForFileType:` → `iconForContentType:` (UniformTypeIdentifiers / `UTType`).
-- [ ] `NSWorkspace openFile:` → `openURL:` / `openApplicationAtURL:configuration:...`.
-- [ ] `NSAlert alertWithMessageText:defaultButton:...` (obsoleto) → `NSAlert` con
+      *(Requiere enlazar el framework y target ≥ 11; se deja para el trabajo en Mac.)*
+- [x] `NSWorkspace openFile:` → `openURL:` con `fileURLWithPath:`.
+- [x] `NSAlert alertWithMessageText:defaultButton:...` (obsoleto) → `NSAlert` con
       `addButtonWithTitle:` y `messageText`/`informativeText`.
-- [ ] Corregir **format strings**: `NSLog(filename)`/`NSLog(contents)` →
-      `NSLog(@"%@", filename)` (riesgo de seguridad y de *crash*).
+- [x] Corregir **format strings**: `NSLog(var)`/`NSLOG(var)` → `NSLog(@"%@", var)`
+      (riesgo de seguridad y de *crash*) en MainController, DownloadItem y CWArrayController.
 - [ ] Revisar el temporizador en `NSEventTrackingRunLoopMode`; usar
       `NSRunLoopCommonModes` o migrar a GCD/`dispatch_source`.
 
@@ -176,9 +181,9 @@ con Hardened Runtime activado.
 - [ ] **Notarizar** con `notarytool` y **grapar** el ticket (`stapler staple`).
 - [ ] Empaquetar en `.dmg` o `.pkg` firmado.
 - [ ] Verificar en una máquina limpia con `spctl -a -vv` y `codesign --verify --deep --strict`.
-- [ ] Actualizar metadatos del bundle: `CFBundleVersion`, `CFBundleShortVersionString`,
-      `CFBundleIdentifier` real (no el `${PRODUCT_NAME:identifier}` por defecto),
-      `LSMinimumSystemVersion` al objetivo elegido.
+- [ ] Actualizar metadatos del bundle: `CFBundleVersion`, ~~`CFBundleShortVersionString`~~ (añadido),
+      `CFBundleIdentifier` real (aún es el `${PRODUCT_NAME:identifier}` por defecto — **decidir** el
+      reverse-DNS, p. ej. `io.github.jnavarroc.cocoawget`), `LSMinimumSystemVersion` al objetivo elegido.
 
 **Criterio de salida:** la app instalada desde el `.dmg` arranca sin advertencias de Gatekeeper en
 macOS Tahoe.

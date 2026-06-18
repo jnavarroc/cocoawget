@@ -17,14 +17,11 @@
 
 @implementation DownloadItem
 
-+ (void)initialize {
-    //NSLOG(@"DownloadItem::initialize");
-    [DownloadItem setKeys:
-        [NSArray arrayWithObjects:@"url", nil]
-        triggerChangeNotificationsForDependentKey:@"fileName"];
-    [DownloadItem setKeys:
-        [NSArray arrayWithObjects:@"url", nil]
-        triggerChangeNotificationsForDependentKey:@"icon"];
++ (NSSet *)keyPathsForValuesAffectingFileName {
+    return [NSSet setWithObject:@"url"];
+}
++ (NSSet *)keyPathsForValuesAffectingIcon {
+    return [NSSet setWithObject:@"url"];
 }
 -(id)init
 {
@@ -189,7 +186,7 @@
 
     NSLOG(@"DownloadItem::startWgetTask");
     wgetPathString=[self wgetPath];
-    [wgetTask setLaunchPath:wgetPathString];
+    [wgetTask setExecutableURL:[NSURL fileURLWithPath:wgetPathString]];
 
 
     [wgetTask setStandardOutput:wgetPipe];// redirect stdout
@@ -223,7 +220,12 @@
     [self setValue:status forKey:@"status"];
             
     // run !!!
-    [wgetTask launch];
+    NSError *launchError=nil;
+    if(![wgetTask launchAndReturnError:&launchError]){
+        NSLOG(@"DownloadItem::startWgetTask launch failed: %@",launchError);
+        [status setString:[NSString stringWithFormat:@"Error: %@",[launchError localizedDescription]]];
+        [self setValue:status forKey:@"status"];
+    }
 
     
     
@@ -269,7 +271,7 @@
 	NSRange range4=NSMakeRange(range3.location+1,range.location-range3.location-1);
 	NSLOG(@"range4 %d %d",range4.location,range4.length);
 	NSString *s=[logString substringWithRange:range4];
-	NSLOG(s);
+	NSLOG(@"%@",s);
 	
 	if(s){
 	[downloadedFilePath release];
@@ -303,7 +305,7 @@
 	
 	NSString *s=[str2 substringToIndex:range2.location];
 	
-	NSLOG(s);
+	NSLOG(@"%@",s);
 	
 	[downloadedFilePath release];
 	downloadedFilePath=s;
@@ -544,7 +546,7 @@ NS_ENDHANDLER
         [arguments addObject:[NSString stringWithFormat:@"--http-user=%@",httpUser]];
     
     if(httpPassword && [httpPassword isEqualToString:@""]==NO)
-        [arguments addObject:[NSString stringWithFormat:@"--http-passwd=%@",httpPassword]];
+        [arguments addObject:[NSString stringWithFormat:@"--http-password=%@",httpPassword]];
     
     BOOL passive_ftp=[[userDefaults valueForKey:@"usePassiveFTP"] boolValue];
     
